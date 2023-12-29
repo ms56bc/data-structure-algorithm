@@ -105,4 +105,39 @@ public class TreeTraversal {
         postOrderDfs(root.getRight());
         System.out.print(root.getValue()+" ");
     }
+
+    public static void levelOrderPrint(TreeNode<Integer> root){
+        if(root == null) return;
+        var q = new Stack<TreeNode<Integer>>();
+        q.push(root);
+        int level = 0;
+        int spaces = 5;
+        printSpaces(spaces - level);
+        System.out.print(root.getValue()+" ");
+        System.out.println();
+
+        while(!q.isEmpty()){
+            level++;
+            var curr = q.pop();
+            System.out.print("level: "+level+ "    ");
+            if(curr.getLeft() != null){
+                System.out.print("left:"+curr.getLeft().getValue());
+                printSpaces(spaces - level);
+                q.push(curr.getLeft());
+            }
+            if(curr.getRight() != null){
+                printSpaces(spaces + level);
+                System.out.print("right"+curr.getRight().getValue());
+                q.push(curr.getRight());
+            }
+            System.out.println();
+           // level++;
+        }
+    }
+    static void printSpaces(int n){
+        while(n > 0){
+            System.out.print(" ");
+            n--;
+        }
+    }
 }
